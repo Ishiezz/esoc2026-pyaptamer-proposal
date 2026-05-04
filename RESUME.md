@@ -1,105 +1,78 @@
 # Isha Singh
 
-**Phone:** +91 8102155513  
-**Email:** singhishaa.24@gmail.com  
-[Github](https://github.com/Ishiezz) • [Codeforces](https://codeforces.com) • [Leetcode](https://leetcode.com)
+**Email:** singhishaa.24@gmail.com | **GitHub:** [github.com/Ishiezz](https://github.com/Ishiezz) | **Location:** Pune, India (IST, UTC+5:30)
 
 ---
 
-## PROFESSIONAL SUMMARY
+## Open Source Contributions
 
-I write open-source code that ships into production. My PR [#281302](https://github.com/microsoft/vscode/pull/281302) was **merged into Microsoft VS Code** — one of the world's most-starred repositories (184k+ ⭐, 100M+ users) — fixing a critical version comparison bug in the extension linter that affected all developers targeting older VS Code versions. In April 2026, I implemented the sklearn-compatible `fit()` / `predict_interactions()` interface for `AptaTransPipeline` in `gc-os-ai/pyaptamer` (PR [#493](https://github.com/gc-os-ai/pyaptamer/pull/493)), resolving a 6-month-old issue filed by the core maintainer — stacking correctly on a live architectural refactor after reading 21 upstream commits before writing a line of code. I build at the intersection of ML engineering and production software: transformer fine-tuning, RAG pipelines, PyTorch Lightning, sklearn-compatible APIs, and full-stack deployment. Pursuing B.Tech in AI & ML (2024–2028). Sharpen problem-solving daily on LeetCode and Codeforces.
+### Microsoft Visual Studio Code — PR [#281302](https://github.com/microsoft/vscode/pull/281302) ✅ Merged
+*January 2026 — TypeScript, Production Codebase, 184k+ ⭐, 100M+ users*
 
----
-
-## OPEN SOURCE CONTRIBUTIONS
-
-**Microsoft Visual Studio Code — PR [#281302](https://github.com/microsoft/vscode/pull/281302)** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Jan 2026
-
-- Contributed a **merged PR** to VS Code (184k+ GitHub stars, 100M+ users worldwide).
-- Fixed incorrect engine version diagnostic in extension linter affecting all developers targeting older VS Code versions.
-- Patched version comparison logic to preserve support for future major releases (e.g., v2.0.0).
-- **Tech:** TypeScript, GitHub, Linting Systems.
-
-**pyaptamer (gc-os-ai) — PR [#493](https://github.com/gc-os-ai/pyaptamer/pull/493) & [#495](https://github.com/gc-os-ai/pyaptamer/pull/495)** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; April 2026
-
-- PR #493: Implemented `fit()` and `predict_interactions()` for `AptaTransPipeline`, resolving a 6-month-old issue filed by the core maintainer. Stacked on a live architectural refactor (PR #441); read 21 upstream commits before writing code.
-- PR #495: Fixed MCTS `TreeNode` phantom visit bug — `n_visits` initialised to `1` instead of `0` broke the UCT exploration guarantee from iteration one.
-- **Tech:** Python, PyTorch Lightning, scikit-learn, pytest, ruff.
+Fixed a semver comparison bug in the extension linter that caused incorrect version diagnostics for all developers targeting older VS Code versions. Patched the comparison logic to correctly handle future major releases (e.g., v2.0.0+). Passed senior engineering review in one of the world's most heavily-reviewed open source repositories.
 
 ---
 
-## SKILLS
+### gc-os-ai/pyaptamer — 6 PRs across API, algorithms, data pipeline, and base architecture
+*April–May 2026 — Python, PyTorch Lightning, scikit-learn, pytest, ruff*
 
-**Computer Languages:** Machine Learning, TypeScript, NoSQL, HTML, CSS, JavaScript, Python, SQL
+**PR [#493](https://github.com/gc-os-ai/pyaptamer/pull/493) — AptaTrans `fit()` + `predict_interactions()` (Open)**
+Implemented the full sklearn-compatible training and batch inference interface for `AptaTransPipeline`, resolving a 6-month-old issue filed by the core maintainer. Before writing code, read all 21 commits of the ongoing `APIDataset` architectural refactor (PR #441) to build on the correct foundation. Delivered: `fit(X, y)` via `APIDataset.from_any()` flexible dispatch, `predict_interactions(X)` via `Trainer.predict()` batch loop, `AptaTransLightning.predict_step()`, `prot_words` docstring standardization across 3 files, and 9 new tests covering input shapes, output types, device handling, and Apple Silicon MPS compatibility.
 
-**Data Tools:** TensorFlow, NumPy
+**PR [#495](https://github.com/gc-os-ai/pyaptamer/pull/495) — MCTS Phantom Visit Fix (Closed — duplicate of #484, independently correct)**
+Found a subtle UCT math bug: `TreeNode.__init__` initialized `n_visits = 1` instead of `0`, destroying the infinite exploration bonus for unvisited nodes from iteration one. Required three coordinated changes across `_algorithm.py`, `uct_score()`, and test assertions. Closed gracefully after discovering PR #484 had the identical fix — handled professionally, moved on immediately.
 
-**Software Packages:** Pandas, Figma, Kubernetes, Tailwind CSS, PyTorch, OpenCV, React Native, Prisma ORM, React, Node.js, Excel, Express JS, MySQL, MongoDB
+**PR [#617](https://github.com/gc-os-ai/pyaptamer/pull/617) — `encode_rna` Docstring + `return_type` Validation (Open)**
+Independently discovered (no open issue): `encode_rna` docstring was fully copy-pasted from a protein encoder — referencing "protein sequences", "amino acid patterns", and containing the typo "trunacted". Invalid `return_type` silently returned a tensor instead of raising `ValueError`. Fixed terminology, added `Raises` section, added validation. All 20 tests pass.
 
-**Additional Courses:** Data Structure
+**PR [#630](https://github.com/gc-os-ai/pyaptamer/pull/630) — `filter_words` Empty Dict `RuntimeWarning` Fix (Open)**
+Independently discovered: `filter_words` emitted a silent `RuntimeWarning: Mean of empty slice` on empty dict input — a live production risk because it is called directly in `AptaTransPipeline._init_words()`. Added `ValueError` guard, `Raises` docstring section, and `test_filter_words_empty_dict`. All 4 tests pass.
 
-**Soft Skills:** Verbal/nonverbal communication, Written communication, Team Building, Creativity, Teamwork
+**PR [#632](https://github.com/gc-os-ai/pyaptamer/pull/632) — `GreedyEncoder` Crash + Silent Failure Fix (Open)**
+Independently discovered: `GreedyEncoder(words={})` either crashed with a confusing `ValueError: max() iterable argument is empty` (when `word_max_len=None`) or silently returned an all-zeros DataFrame (when `word_max_len` was set). Added guard in `__init__`. Created the **first-ever test suite** for `GreedyEncoder` — 7 tests covering encoding, longest-match preference, padding, truncation, unknown tokens, multiple sequences, and the empty words guard. All 7 pass.
 
-**Others:** RAG, Git and Github, Docker, Transformers, Terraform, Unit Testing, Microsoft Office, Spreadsheet, Canva, Analytics, LangChain, n8n Introduction, LangGraph, GitHub Actions, Crew AI, Vector Embeddings, Docker Compose, AWS, Natural Language Processing, Matplotlib, Seaborn, LLM, Generative AI
-
----
-
-## EDUCATION
-
-**Bachelor of Technology (AI ML)** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2024 – 2028  
-Newton School Of Technology-ADYPU, Pune &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Grade: 7.86/10.0
-
-**Intermediate (Class XII)** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2022 – 2023  
-Gyan Bharti Residential Complex &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Grade: 78.3%
-
-**Matriculation (Class X)** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2020 – 2021  
-Creane Memorial High School &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Grade: 95.0%
+**PR [#637](https://github.com/gc-os-ai/pyaptamer/pull/637) — `BaseTransform` Abstract Method Convention Fix (Open)**
+Independently discovered: `BaseTransform._fit`, `_transform`, and `_transform_element` raised `ValueError` for unimplemented abstract methods since the class was created in November 2025. Python convention — and `skbase.BaseEstimator` which `BaseTransform` inherits from — uses `NotImplementedError`. Also added missing `__author__` and `__all__` module-level attributes consistent with every other pyaptamer module.
 
 ---
 
-## PROJECTS
+## Projects
 
-**SkillBridge** ( [Github](https://github.com/Ishiezz) ) ( [Demo](#) )
+**ContraLegal-AI** — [GitHub](https://github.com/Ishiezz)
 
-- **Objectives:** Build a production-ready full-stack and iOS platform connecting blue-collar workers with employers through a verified, role-based marketplace.
-- **Insights:** Demonstrates scalable system design using layered architecture, RBAC, and state-driven workflows to manage real-world job lifecycles and user interactions.
-- **Tools Used:** Node.js, TypeScript, Express, Prisma, PostgreSQL, React, Tailwind, SwiftUI (iOS), JWT auth, Cloudinary, Docker, Nginx, PM2, and AWS (EC2 + RDS).
-- **Project Impact:** Delivers a production-grade, cross-platform marketplace with secure authentication, real-time workflows, and scalable deployment infrastructure for real-world usage.
+Autonomous legal intelligence platform that converts unstructured contracts into structured, multi-class risk assessments with automated redrafting. Built on Legal-BERT + FAISS + LangChain RAG pipeline. Achieves 97%+ classification accuracy with improved high-risk recall. Stack: Python, Legal-BERT, FAISS, LangChain, PyMuPDF, Scikit-learn, Streamlit, Gemini/OpenAI/Groq APIs, GitHub Actions CI/CD.
 
-**ContraLegal-AI** ( [Github](https://github.com/Ishiezz) ) ( [Demo](#) )
+**SkillBridge** — [GitHub](https://github.com/Ishiezz)
 
-- **Objectives:** Build an autonomous legal intelligence platform that converts unstructured contracts into structured, multi-class risk assessments with automated redrafting.
-- **Insights:** Demonstrates how combining transformer models (Legal-BERT), RAG pipelines, and rule-based heuristics enables explainable, high-precision legal risk analysis.
-- **Tools Used:** Python, Legal-BERT, FAISS, LangChain, PyMuPDF, Scikit-learn, Streamlit, Gemini/OpenAI/Groq APIs, and CI/CD via GitHub Actions.
-- **Project Impact:** Delivers a high-accuracy legal analysis system (97%+ accuracy, improved high-risk recall) that reduces manual contract review effort and enhances decision reliability.
+Production-ready full-stack and iOS platform connecting blue-collar workers with employers through a verified, role-based marketplace. Stack: Node.js, TypeScript, Express, Prisma, PostgreSQL, React, Tailwind, SwiftUI, JWT, Cloudinary, Docker, Nginx, PM2, AWS (EC2 + RDS).
 
-**Impactify – Your AI-Powered Data Analyst** ( [Github](https://github.com/Ishiezz) ) ( [Demo](#) )
+**Impactify** — [GitHub](https://github.com/Ishiezz)
 
-- **Objectives:** Create a full-stack platform that turns raw data into clear, actionable insights for faster and better decision-making.
-- **Insights:** Shows how combining data processing pipelines with interactive visualization layers helps surface meaningful patterns from complex, unstructured datasets.
-- **Tools Used:** Python, Pandas, Matplotlib, Seaborn, Streamlit, NumPy, and Git/GitHub.
-- **Project Impact:** Delivers a practical, data-driven analytics tool demonstrating end-to-end application development with real-world value for non-technical users.
+Full-stack data analytics platform that turns raw data into actionable insights. Stack: Python, Pandas, Matplotlib, Seaborn, Streamlit, NumPy.
 
 ---
 
-## CERTIFICATIONS
+## Technical Skills
 
-**Generative AI for Everyone** &nbsp; DeepLearning.AI ( [Link](#) ) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; May 2025  
-Developed practical expertise in Prompt Engineering, Responsible AI, Automation, Generative AI, Cloud Applications, Business Process Automation, AI Product Strategy, Large Language Models, and core Artificial Intelligence concepts.
+**ML & AI:** PyTorch, PyTorch Lightning, scikit-learn, Transformers (BERT, Legal-BERT), RAG pipelines, LangChain, LangGraph, FAISS, Diffusion models (studying), NumPy, Pandas, Matplotlib, Seaborn, TensorFlow, OpenCV
 
-**AI For Everyone** &nbsp; DeepLearning.AI ( [Link](#) ) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; March 2025  
-Gained expertise in AI/ML, Deep Learning, Data Science, and Data Ethics, with strong skills in Strategic Thinking, Engineering Management, and Team Building.
+**Software Engineering:** Python, TypeScript, JavaScript, SQL, Node.js, Express, React, React Native, SwiftUI, HTML/CSS, Tailwind
+
+**Infrastructure & Tools:** Docker, Docker Compose, AWS (EC2, RDS), GitHub Actions, Nginx, PM2, Git, pytest, ruff, Prisma ORM, MongoDB, PostgreSQL, MySQL
 
 ---
 
-## EXTRA-CURRICULAR ACTIVITIES
+## Education
 
-### Leadership Experience
+**B.Tech in AI & ML** — Newton School of Technology, ADYPU, Pune (2024–2028)
 
-**Vice President — House Council, House 4**  
-Newton School of Technology (ADYPU) &nbsp;&nbsp; Aug 2025 – Present
+**Class XII** — Gyan Bharti Residential Complex (2022–2023) — 78.3%
 
-- Planned and executed academic, cultural, and sports events.
-- Coordinated with faculty and student teams for smooth operations.
-- Demonstrated leadership, teamwork, and event management skills.
+**Class X** — Creane Memorial High School (2020–2021) — 95.0%
+
+---
+
+## Leadership
+
+**Vice President — House Council, Newton School of Technology** (Aug 2025–Present)
+Planned and executed academic, cultural, and sports events; coordinated cross-functional student and faculty teams.
